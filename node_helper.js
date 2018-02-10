@@ -75,20 +75,22 @@ module.exports = NodeHelper.create({
 
 			var statsSourcesRequest = new XMLHttpRequest.XMLHttpRequest();
 			statsSourcesRequest.open("GET", url, true);
-			if (this.readyState === 4) {
-				if (this.status === 200) {
-					console.log(this.responseText);
-					self.sendSocketNotification("SOURCES", this.responseText);
-				}
-				else {
-					console.log(self.name + ": Could not load pihole sources.");
-					retry = true; // Try again
-				}
+			statsSourcesRequest.onreadystatechange = function() {
+				if (this.readyState === 4) {
+					if (this.status === 200) {
+						console.log(this.responseText);
+						self.sendSocketNotification("SOURCES", this.responseText);
+					}
+					else {
+						console.log(self.name + ": Could not load pihole sources.");
+						retry = true; // Try again
+					}
 
-				if (retry) {
-					console.log("Retrying...");
-					console.log(config);
-					this.getPiholeStats(config); // Recursive until success
+					if (retry) {
+						console.log("Retrying...");
+						console.log(config);
+						this.getPiholeStats(config); // Recursive until success
+					}
 				}
 			};
 			statsSourcesRequest.send();
