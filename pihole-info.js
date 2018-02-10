@@ -110,70 +110,6 @@ Module.register("pihole-info", {
 		return wrapper;
 	},
 
-	// updateStats: function() {
-	// 	console.log("Getting Stats");
-	// 	var url = this.config.apiURL + "?summary";
-	// 	var self = this;
-	// 	var retry = true;
-
-	// 	var statsSummaryRequest = new XMLHttpRequest();
-	// 	statsSummaryRequest.open("GET", url, true);
-	// 	statsSummaryRequest.onreadystatechange = function() {
-	// 		if (this.readyState === 4) {
-	// 			if (this.status === 200) {
-	// 				self.processSummary(JSON.parse(this.response));
-	// 			} else {
-	// 				console.log(self.name + ": Could not load pi-hole summary.");
-	// 			}
-
-	// 			if (retry) {
-	// 				self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
-	// 				// If self.loaded, the get was successful and we'll update at the regular time
-	// 				// Otherwise, we need to schedule a retry
-	// 			}
-	// 		}
-	// 	};
-	// 	statsSummaryRequest.send();
-
-	// 	if (self.config.showSources) {
-	// 		console.log("Show Sources");
-	// 		var url = this.config.apiURL + "?getQuerySources" + "&auth=" + this.config.webpassword;
-	// 		var retry = true;
-
-	// 		var statsSourcesRequest = new XMLHttpRequest();
-	// 		statsSourcesRequest.open("GET", url, true);
-	// 		statsSourcesRequest.onreadystatechange = function() {
-	// 			console.log("State");
-	// 			if (this.readyState === 4) {
-	// 				console.log("4");
-	// 				if (this.status === 200) {
-	// 					console.log(this.response);
-	// 					self.processSources(JSON.parse(this.response));
-	// 				} else {
-	// 					console.log(self.name + ": Could not load pi-hole sources.");
-	// 				}
-
-	// 				if (retry) {
-	// 					self.scheduleUpdate((self.loaded) ? -1 : self.config.retryDelay);
-	// 				}
-	// 			}
-	// 		};
-	// 		statsSourcesRequest.send();
-	// 	}
-	// },
-
-	// scheduleUpdate: function(delay, fn) {
-	// 	var nextLoad = this.config.updateInterval;
-	// 	if (typeof delay !== "undefined" && delay >= 0) {
-	// 		nextLoad = delay;
-	// 	}
-
-	// 	var self = this
-	// 	setTimeout(function() {
-	// 		self.updateStats();
-	// 	}, nextLoad);
-	// },
-
 	processSummary: function(data) {
 		if (!data) {
 			// Did not receive usable new data.
@@ -203,7 +139,6 @@ Module.register("pihole-info", {
 	// Receive resulting information from the node-helper
 	socketNotificationReceived: function (notification, payload) {
 		console.log(notification);
-		console.log(payload);
 		if(notification === "SUMMARY") {
 			this.processSummary(JSON.parse(payload));
 		}

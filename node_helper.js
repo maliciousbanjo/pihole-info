@@ -52,7 +52,7 @@ module.exports = NodeHelper.create({
 		statsSummaryRequest.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
-					console.log(this.responseText);
+					//console.log(this.responseText);
 					self.sendSocketNotification("SUMMARY", this.responseText);
 				}
 				else {
@@ -78,7 +78,7 @@ module.exports = NodeHelper.create({
 			statsSourcesRequest.onreadystatechange = function() {
 				if (this.readyState === 4) {
 					if (this.status === 200) {
-						console.log(this.responseText);
+						//console.log(this.responseText);
 						self.sendSocketNotification("SOURCES", this.responseText);
 					}
 					else {
