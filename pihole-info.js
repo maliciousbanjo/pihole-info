@@ -14,11 +14,9 @@ Module.register("pihole-info", {
 		showSources: true,
 		showSourceHostnameOnly: true,
 		webpassword: "",
-		updateInterval: 1 * 60 * 1000, // every 10 minutes
+		updateInterval: 10 * 60 * 1000, // every 10 minutes
 		animationSpeed: 1000,
-
 		retryDelay: 2500,
-		initialLoadDelay: 0,
 	},
 
 	// Define start sequence.
