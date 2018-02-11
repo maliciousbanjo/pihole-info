@@ -2,28 +2,29 @@
 
 This is a module for the [MagicMirror²](https://github.com/MichMich/MagicMirror/).
 
-Todo: Insert description here!
+This module displays information from your running Pihole instance. It is a modified version of MMM-pihole-stats,
+adapted to query on the serverside instead of the client side.
 
-## Using the module
+## Installation
+ 1. Clone this repo into `~/MagicMirror/modules` directory.
+ 2. Configure your `~/MagicMirror/config/config.js`:
+ 
+     ```
+     {
+         module: 'pihole-info',
+         position: 'bottom_right', // Or any valid MagicMirror position.
+         config: {
+             // See configuration options
+         }
+     }
+     ```
 
-To use this module, add the following configuration block to the modules array in the `config/config.js` file:
-```js
-var config = {
-    modules: [
-        {
-            module: '
-pihole-info',
-            config: {
-                // See below for configurable options
-            }
-        }
-    ]
-}
-```
-
-## Configuration options
-
-| Option           | Description
-|----------------- |-----------
-| `option1`        | *Required* DESCRIPTION HERE
-| `option2`        | *Optional* DESCRIPTION HERE TOO <br><br>**Type:** `int`(milliseconds) <br>Default 60000 milliseconds (1 minute)
+## Configuration Options
+| **Option** | **Default** | **Description** |
+| --- | --- | --- |
+| `apiURL` | `http://pi.hole/admin/api.php` | Absolute URL to the Pi-Hole admin API |
+| `showSources` | `true` | Show request sources |
+| `showSourceHostnameOnly` | `true` | Only show hostname if applicable without showing IP address |
+| `updateInterval` | `600000` | Time in ms to wait until updating |
+| `retryDelay` | `2500` | Time in ms to wait before retry |
+| `webpassword` |`""`| Needed to show sources, can be found in `/etc/pihole/setupVars.conf` on your pihole system.|

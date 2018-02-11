@@ -10,8 +10,7 @@
 Module.register("pihole-info", {
 	// Default module config.
 	defaults: {
-		//apiURL: "http://pi.hole/admin/api.php",
-		apiURL: "http://192.168.1.60/admin/api.php",
+		apiURL: "http://pi.hole/admin/api.php",
 		showSources: true,
 		showSourceHostnameOnly: true,
 		webpassword: "",
@@ -34,10 +33,8 @@ Module.register("pihole-info", {
 
 		this.loaded = false;
 		this.sendSocketNotification("START", this.config); // Start on the serverside
-		//this.scheduleUpdate(this.config.initialLoadDelay);
 	},
 
-	// Override dom generator.
 	getDom: function() {
 		var wrapper = document.createElement("div");
 

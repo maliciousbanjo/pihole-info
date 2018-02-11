@@ -11,14 +11,6 @@ var XMLHttpRequest = require("xmlhttprequest");
 
 module.exports = NodeHelper.create({
 
-	// Override socketNotificationReceived method.
-
-	/* socketNotificationReceived(notification, payload)
-	 * This method is called when a socket notification arrives.
-	 *
-	 * argument notification string - The identifier of the noitication.
-	 * argument payload mixed - The payload of the notification.
-	 */
 	socketNotificationReceived: function(notification, payload) {
 		if (notification === "START") {
 			console.log(notification + " received!");
@@ -35,12 +27,10 @@ module.exports = NodeHelper.create({
 		}
 	},
 
-	// Example function send notification test
 	sendNotificationTest: function(payload) {
 		this.sendSocketNotification("pihole-info-NOTIFICATION_TEST", payload);
 	},
 
-	// Test another function
 	getPiholeStats: function(config) {
 		console.log("Gathering Pihole Stats");
 		var url = config.apiURL + "?summary";
@@ -63,7 +53,7 @@ module.exports = NodeHelper.create({
 				if (retry) {
 					console.log("Retrying...");
 					console.log(config);
-					self.getPiholeStats(config); // Recursive until success
+					setTimeout(self.getPiholeStats(config), config.retryDelay);
 				}
 			}
 		};
@@ -89,7 +79,7 @@ module.exports = NodeHelper.create({
 					if (retry) {
 						console.log("Retrying...");
 						console.log(config);
-						this.getPiholeStats(config); // Recursive until success
+						setTimeout(self.getPiholeStats(config), config.retryDelay);
 					}
 				}
 			};
